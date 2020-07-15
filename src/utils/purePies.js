@@ -1,6 +1,7 @@
 export default repos => {
     const languages = {};
-    repos.map((repo) => {
+
+    repos.forEach((repo) => {
         if(languages[repo.language]){
             languages[repo.language]++;
         }

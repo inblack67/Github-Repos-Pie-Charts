@@ -1,18 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, Fragment, useEffect } from 'react'
 import highcharts from 'highcharts'
 import ReactHighcharts from 'highcharts-react-official'
 import PieContext from '../context/pies/pieContext.js'
-import { Fragment } from 'react'
+import Preloaders from './Preloaders'
 
 const Pie = () => {
 
+    useEffect(() => {
+        getGitRepos('inblack67');
+        // eslint-disable-next-line
+    },[])
+
     const pieContext = useContext(PieContext);
 
-    const { loading, pies, user } = pieContext;
+    const { loading, pies, user, getGitRepos } = pieContext;
 
     const options = {
         chart: {
             type: 'pie'
+        },
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
         },
         series: [
             {
@@ -21,6 +32,14 @@ const Pie = () => {
                 data: pies
             }
         ]
+    }
+
+    if(loading){
+        return <Preloaders />
+    }
+
+    if(pies.length === 0){
+        return <p className="flow-text center red-text">No repos yet.</p>
     }
 
     return (
