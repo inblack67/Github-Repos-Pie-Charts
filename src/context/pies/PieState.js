@@ -8,6 +8,7 @@ import { GET_REPOS, PURE_PIES, ERROR } from '../types.js'
 const PieState = (props) => {
 
     const initialState = {
+        user: '',
         repos: [],
         loading: true,
         pies: []
@@ -15,13 +16,16 @@ const PieState = (props) => {
 
     const [state, dispatch] = useReducer(PieReducer, initialState);
 
-    const getGitRepos = async () => {
+    const getGitRepos = async (username) => {
         try {
-            const res = await fetchRepos('inblack67');
+            const res = await fetchRepos(username);
             dispatch({ 
                 type: GET_REPOS,
-                payload: res
+                payload: {data: res, user: username},
             })
+            if(res){
+                purify(res);
+            }
         } catch (err) {
             console.error(err)
             dispatch({
@@ -44,8 +48,9 @@ const PieState = (props) => {
             repos: state.repos,
             loading: state.loading,
             pies: state.pies,
+            user: state.user,
             getGitRepos,
-            purePies
+            purify
         }}>
             { props.children }
         </PieContext.Provider>

@@ -7,8 +7,8 @@ export default (state, action) => {
         case GET_REPOS: 
         return {
             ...state,
-            repos: payload,
-            loading: false
+            repos: payload.data,
+            user: payload.user
         }
         case PURE_PIES: 
         return {

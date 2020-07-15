@@ -1,6 +1,6 @@
 export default repos => {
-    const languages = [];
-    repos.forEach(repo => {
+    const languages = {};
+    repos.map((repo) => {
         if(languages[repo.language]){
             languages[repo.language]++;
         }
@@ -8,5 +8,13 @@ export default repos => {
             languages[repo.language] = 1;
         }
     })
-    return languages;
+
+    let langObject = [];
+
+    for (const key in languages) {
+        langObject = [...langObject, { name: key, y: languages[key]}];
+    }
+
+
+    return langObject;
 }
