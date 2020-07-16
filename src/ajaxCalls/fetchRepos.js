@@ -9,5 +9,6 @@ export default async (username) => {
     if(err.response.status === 404){
       M.toast({ html: 'User not found!' })
     }
+    throw new Error('User not found');
   }
   }

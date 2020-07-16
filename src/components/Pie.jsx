@@ -43,7 +43,7 @@ const Pie = () => {
     }
 
     return (
-        <div>
+        <div className='container'>
             { !loading && pies.length > 0 && <Fragment>
                 <p className="flow-text center">
                     {user}
