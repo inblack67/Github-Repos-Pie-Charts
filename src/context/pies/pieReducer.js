@@ -8,7 +8,7 @@ export default (state, action) => {
         return {
             ...state,
             repos: payload.data,
-            user: payload.user
+            user: payload.user,loading: false
         }
         case PURE_PIES: 
         return {
